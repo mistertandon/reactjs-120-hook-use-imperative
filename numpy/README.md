@@ -1,3 +1,3 @@
 #### Numpy functions implementation
 
-  - [Understand Numpy index array](./numpy/0020_index_array.ipynb)
+  - [Understand Numpy index array](https://github.com/mistertandon/udacity-ml-foundation/blob/master/numpy/0020_index_array.ipynb)

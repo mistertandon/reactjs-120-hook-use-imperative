@@ -9,7 +9,8 @@
  - DataFrame
    - Create [DataFrame](001_DataFrame.ipynb) in different ways
    - df.std() and df.mean() function illustration by making use of correlation [notebbok](004_correlation.ipynb)
-   - pandas.DataFrame.shift [notebook](005_shift.ipynb) 
+   - pandas.DataFrame.shift [notebook](005_shift.ipynb)
+   - pandas.DataFrame.applymap [notebook](006_applymap.ipynb)
 ---
 
  - Series

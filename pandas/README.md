@@ -11,6 +11,7 @@
    - df.std() and df.mean() function illustration by making use of correlation [notebbok](004_correlation.ipynb)
    - pandas.DataFrame.shift [notebook](005_shift.ipynb)
    - pandas.DataFrame.applymap [notebook](006_applymap.ipynb)
+   - pandas.DataFrame.sort_values AND pandas.DataFrame.apply [notebook](007_apply_and_sort_values.ipynb)
 ---
 
  - Series

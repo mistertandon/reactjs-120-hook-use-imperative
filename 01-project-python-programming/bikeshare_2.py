@@ -3,44 +3,6 @@ import pandas as pd
 import numpy as np
 import helper
 
-CITY_DATA1 = { 'chicago': 'chicago.csv',
-              'new york city': 'new_york_city.csv',
-              'washington': 'washington.csv' }
-
-FILTER_DATA = {
-'month':'month',
-'day':'day',
-'both':'both',
-'none':'none'
-}
-
-MONTH_DATA = {
-'all':'all',
-'jan':'January',
-'feb':'February',
-'mar':'March',
-'apr':'April',
-'may':'May',
-'jun':'June',
-'jul':'July',
-'aug':'August',
-'sep':'September',
-'oct':'October',
-'nov':'November',
-'dec':'December'
-}
-
-DAY_DATA = {
-'0': 'sunday',
-'1': 'moday',
-'2': 'tuesday',
-'3': 'wednesday',
-'4': 'thursday',
-'5': 'friday',
-'6': 'saturday',
-'7': 'all'
-}
-
 def get_filters():
     """
     Asks user to specify a city, month, and day to analyze.
@@ -51,14 +13,24 @@ def get_filters():
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
     print('Hello! Let\'s explore some US bikeshare data!')
+    month = day = 'all'
     # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
+    city = helper.get_user_city()
+    print('Selected city is: ', city)
 
+    # get user input for filetr type input
+    filter_val = helper.get_user_filter()
+    print('Selected filter is: ', filter_val)
 
     # get user input for month (all, january, february, ... , june)
-
+    if filter_val =='both' or filter_val =='month':
+        month = helper.get_month()
+        print('Selected Month is: ', month)
 
     # get user input for day of week (all, monday, tuesday, ... sunday)
-
+    if filter_val =='both' or filter_val =='day':    
+        day = helper.get_day()
+        print('Selected Day is: ', day)
 
     print('-'*40)
     return city, month, day
@@ -155,19 +127,6 @@ def user_stats(df):
 
 def main():
     while True:
-        city_val = helper.get_user_city()
-        print('Selected city is: ', city_val)
-
-        filter_val = helper.get_user_filter()
-        print('Selected filter is: ', filter_val)
-
-        if filter_val =='both' or filter_val =='month':
-            month_val = helper.get_month()
-            print('Selected Month is: ', month_val)
-
-        if filter_val =='both' or filter_val =='day':    
-            day_val = helper.get_day()
-            print('Selected Day is: ', day_val)
 
         city, month, day = get_filters()
         df = load_data(city, month, day)

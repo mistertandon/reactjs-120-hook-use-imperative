@@ -1,4 +1,5 @@
 .git/
 **/.ipynb_checkpoints/
-**/__MACOSX/*
+**/__MACOSX/
+**/__pycache__/
 .vscode/

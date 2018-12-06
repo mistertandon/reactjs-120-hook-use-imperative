@@ -10,11 +10,11 @@ FILTER_DATA = { 'month':'month',
 MONTH_DATA = { 1:{
                     'full_name':'January',
                     'value':1
-                    },
+                },
                 2:{
-                        'full_name':'February',
-                        'value':2
-                    },
+                    'full_name':'February',
+                    'value':2
+                },
                 3:{
                     'full_name':'March',
                     'value':3
@@ -57,13 +57,13 @@ MONTH_DATA = { 1:{
                 }
 }
 
-DAY_DATA = {'0': 'monday',
-            '1': 'tuesday',
-            '2': 'wednesday',
-            '3': 'thursday',
-            '4': 'friday',
-            '5': 'saturday',
-            '6': 'sunday'}                
+DAY_DATA = {0: 'monday',
+            1: 'tuesday',
+            2: 'wednesday',
+            3: 'thursday',
+            4: 'friday',
+            5: 'saturday',
+            6: 'sunday'}                
 
 def get_user_city():
     while True:
@@ -75,6 +75,8 @@ def get_user_city():
         else:
             print('\n You have entered incorrect option. Please try again...')
 
+    print('Selected city is: ', city_val)
+    
     return city_val
 
 
@@ -88,32 +90,36 @@ def get_user_filter():
         else:
             print('\n You have entered incorrect option. Please try again...')
 
+    print('Selected filter is: ', filter_val)
+
     return filter_val
 
 
 def get_month():
     while True:
-        month_input = input('\nSelect month\n1 => January, 2 => February, 3 => March, 4 => April, 5 => May, 6 => June, 7 => July, 8 => August, 9 => September, 10 => October, 11 => November, 12 => December \nNote: Type 1 to select January month\nType input : ')           
+        month_input = int(input('\nSelect month\n1 => January, 2 => February, 3 => March, 4 => April, 5 => May, 6 => June, 7 => July, 8 => August, 9 => September, 10 => October, 11 => November, 12 => December \nNote: Type 1 to select January month\nType input : '))
 
         if month_input in MONTH_DATA:
-            month_val = MONTH_DATA[month_input].value
+            month_val = MONTH_DATA[month_input]['value']
             break
         else:
             print('You have entered incorrect option. Please try again...')
     
-    print('Selected Month is: ', MONTH_DATA[month_input].full_name)
+    print('Selected Month is: ', MONTH_DATA[month_input]['full_name'])
 
     return month_val
 
 
 def get_day():
     while True:
-        day_input = input('\nSelect day\n 0 => sunday, 1 => moday, 2 => tuesday, 3 => wednesday, 4 => thursday, 5 => friday, 6 => saturday\nNote: Type 6 to select saturday\nType input : ')
+        day_input = int(input('\nSelect day\n 0 => Monday, 1 => Tuesday, 2 => Wednesday, 3 => Thursday, 4 => Friday, 5 => Saturday, 6 => Sunday\nNote: Type 1 to select Tuesday\nType input : '))
 
         if day_input in DAY_DATA:
             day_val = DAY_DATA[day_input]
             break
         else:
             print('You have entered incorrect option. Please try again...')
+
+    print('Selected Day is: ', day_val)
 
     return day_val

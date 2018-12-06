@@ -15,14 +15,13 @@ def get_filters():
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
     print('Hello! Let\'s explore some US bikeshare data!')
+    
     month = day = 'all'
     # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     city = helper.get_user_city()
-    print('Selected city is: ', city)
 
     # get user input for filetr type input
     filter_val = helper.get_user_filter()
-    print('Selected filter is: ', filter_val)
 
     # get user input for month (all, january, february, ... , june)
     if filter_val =='both' or filter_val =='month':
@@ -31,11 +30,10 @@ def get_filters():
     # get user input for day of week (all, monday, tuesday, ... sunday)
     if filter_val =='both' or filter_val =='day':    
         day = helper.get_day()
-        print('Selected Day is: ', day)
 
     print('-'*40)
-    return city, month, day
 
+    return city, month, day
 
 def load_data(city, month, day):
     """
@@ -53,13 +51,14 @@ def load_data(city, month, day):
     df['Start Time'], df['End Time'] = pd.to_datetime(df['Start Time']), pd.to_datetime(df['End Time'])
     df['start_time_month'], df['end_time_month'] = df['Start Time'].dt.month, df['End Time'].dt.month
     df['start_time_weekday'], df['end_time_weekday'] = df['Start Time'].dt.weekday, df['End Time'].dt.weekday
+    df['start_time_hour'], df['end_time_hour'] = df['Start Time'].dt.hour, df['End Time'].dt.hour
 
     if month != 'all':
         df = df[(df['start_time_month'] == month) & (df['end_time_month'] == month)]
     
     if day != 'all':
         df = df[(df['start_time_weekday'] == day) & (df['end_time_weekday'] == day)]
-        
+
     return df
 
 
@@ -74,10 +73,12 @@ def time_stats(df):
     print('most common month : ', helper.MONTH_DATA[common_month_max_value]['full_name'])
 
     # display the most common day of week
-
+    common_week_max_value = df.groupby('start_time_weekday').agg({'start_time_weekday':'count'}).idxmax()['start_time_weekday']
+    print('most common weekday : ', helper.DAY_DATA[common_week_max_value])
 
     # display the most common start hour
-
+    common_hour_max_value = df.groupby('start_time_hour').agg({'start_time_weekday':'count'})
+    print('most common start hour : ', common_hour_max_value)
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
@@ -88,7 +89,7 @@ def station_stats(df):
 
     print('\nCalculating The Most Popular Stations and Trip...\n')
     start_time = time.time()
-
+    print(df.columns)
     # display most commonly used start station
 
 
@@ -142,11 +143,11 @@ def main():
 
         #city, month, day = get_filters()
         #df = load_data(city, month, day)
-        df = load_data("chicago", 'all', 'all')
-
-        time_stats(df)
-        sys.exit()
+        df = load_data("chicago", 6, 'all')
+        #time_stats(df)
+        
         station_stats(df)
+        sys.exit()
         trip_duration_stats(df)
         user_stats(df)
         break

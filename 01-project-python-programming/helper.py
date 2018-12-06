@@ -7,26 +7,63 @@ FILTER_DATA = { 'month':'month',
                 'both':'both',
                 'none':'none'}
 
-MONTH_DATA = { 'jan':'January',
-                'feb':'February',
-                'mar':'March',
-                'apr':'April',
-                'may':'May',
-                'jun':'June',
-                'jul':'July',
-                'aug':'August',
-                'sep':'September',
-                'oct':'October',
-                'nov':'November',
-                'dec':'December'}
+MONTH_DATA = { 'jan':{
+                    'full_name':'January',
+                    'value':1
+                    },
+                'feb':{
+                        'full_name':'February',
+                        'value':2
+                    },
+                'mar':{
+                    'full_name':'March',
+                    'value':3
+                },
+                'apr':{
+                    'full_name':'April',
+                    'value':4
+                },
+                'may':{
+                    'full_name':'May',
+                    'value':5
+                },
+                'jun':{
+                    'full_name':'June',
+                    'value':6
+                },
+                'jul':{
+                    'full_name':'July',
+                    'value':7
+                },
+                'aug':{
+                    'full_name':'August',
+                    'value':8
+                },
+                'sep':{
+                    'full_name':'September',
+                    'value':9
+                },
+                'oct':{
+                    'full_name':'October',
+                    'value':10
+                },
+                'nov':{
+                    'full_name':'November',
+                    'value':11
+                },
+                'dec':{
+                    'full_name':'December',
+                    'value':12
+                }
+}
 
-DAY_DATA = {'0': 'sunday',
-            '1': 'moday',
-            '2': 'tuesday',
-            '3': 'wednesday',
-            '4': 'thursday',
-            '5': 'friday',
-            '6': 'saturday'}                
+DAY_DATA = {'0': 'monday',
+            '1': 'tuesday',
+            '2': 'wednesday',
+            '3': 'thursday',
+            '4': 'friday',
+            '5': 'saturday',
+            '6': 'sunday'}                
 
 def get_user_city():
     while True:
@@ -56,13 +93,15 @@ def get_user_filter():
 
 def get_month():
     while True:
-        month_input = input('\nSelect month\n all => All, jan => January, feb => February, mar => March, apr => April, may => May, jun => June, jul => July, aug => August, sep => September, oct => October, nov => November, dec => December \n Note: Type jan to select January month\nType input : ')           
+        month_input = input('\nSelect month\njan => January, feb => February, mar => March, apr => April, may => May, jun => June, jul => July, aug => August, sep => September, oct => October, nov => November, dec => December \n Note: Type jan to select January month\nType input : ')           
 
         if month_input in MONTH_DATA:
-            month_val = MONTH_DATA[month_input]
+            month_val = MONTH_DATA[month_input].value
             break
         else:
             print('You have entered incorrect option. Please try again...')
+    
+    print('Selected Month is: ', MONTH_DATA[month_input].full_name)
 
     return month_val
 

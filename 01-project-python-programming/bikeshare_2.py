@@ -2,6 +2,8 @@ import time
 import pandas as pd
 import numpy as np
 import helper
+import sys
+from datetime import datetime
 
 def get_filters():
     """
@@ -25,7 +27,6 @@ def get_filters():
     # get user input for month (all, january, february, ... , june)
     if filter_val =='both' or filter_val =='month':
         month = helper.get_month()
-        print('Selected Month is: ', month)
 
     # get user input for day of week (all, monday, tuesday, ... sunday)
     if filter_val =='both' or filter_val =='day':    
@@ -47,8 +48,18 @@ def load_data(city, month, day):
     Returns:
         df - Pandas DataFrame containing city data filtered by month and day
     """
+    df = pd.read_csv(city + ".csv")
 
+    df['Start Time'], df['End Time'] = pd.to_datetime(df['Start Time']), pd.to_datetime(df['End Time'])
 
+    if month != 'all':
+        df['start_time_month'], df['end_time_month'] = df['Start Time'].dt.month, df['End Time'].dt.month
+        df = df[(df['start_time_month'] == month) & (df['end_time_month'] == month)]
+    
+    if day != 'all':
+        df['start_time_weekday'], df['end_time_weekday'].dt.weekday = df['Start Time'].dt.weekday, df['End Time'].dt.weekday
+        df = df[(df['start_time_weekday'] == day) & (df['start_time_weekday'] == day)]
+        
     return df
 
 
@@ -128,8 +139,9 @@ def user_stats(df):
 def main():
     while True:
 
-        city, month, day = get_filters()
-        df = load_data(city, month, day)
+        #city, month, day = get_filters()
+        #df = load_data(city, month, day)
+        df = load_data("chicago", 6, 'all')
 
         time_stats(df)
         station_stats(df)

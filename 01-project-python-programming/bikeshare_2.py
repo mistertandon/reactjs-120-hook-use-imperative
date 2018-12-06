@@ -77,7 +77,7 @@ def time_stats(df):
     print('most common weekday : ', helper.DAY_DATA[common_week_max_value])
 
     # display the most common start hour
-    common_hour_max_value = df.groupby('start_time_hour').agg({'start_time_weekday':'count'})
+    common_hour_max_value = df.groupby('start_time_hour').agg({'start_time_weekday':'count'}).idmax()['start_time_hour']
     print('most common start hour : ', common_hour_max_value)
 
     print("\nThis took %s seconds." % (time.time() - start_time))
@@ -89,18 +89,23 @@ def station_stats(df):
 
     print('\nCalculating The Most Popular Stations and Trip...\n')
     start_time = time.time()
-    print(df.columns)
-    # display most commonly used start station
 
+    # display most commonly used start station
+    common_start_station = df.groupby('Start Station').agg({'Start Station':'count'}).idxmax()
+    print('Most commonly used start station : ', common_start_station)
 
     # display most commonly used end station
-
+    common_end_station = df.groupby('End Station').agg({'End Station':'count'}).idxmax()
+    print('Most commonly used end station : ', common_end_station)
 
     # display most frequent combination of start station and end station trip
-
+    common_start_end_trip = df.groupby(['Start Station', 'End Station']).agg({'Start Station':'count'}).idxmax()
+    print('Most frequent combination of start station and end station : ', common_start_end_trip)
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
+
+    return
 
 
 def trip_duration_stats(df):
@@ -141,10 +146,10 @@ def user_stats(df):
 def main():
     while True:
 
-        #city, month, day = get_filters()
-        #df = load_data(city, month, day)
-        df = load_data("chicago", 6, 'all')
-        #time_stats(df)
+        city, month, day = get_filters()
+        df = load_data(city, month, day)
+        #df = load_data("chicago", 6, 'all')
+        time_stats(df)
         
         station_stats(df)
         sys.exit()

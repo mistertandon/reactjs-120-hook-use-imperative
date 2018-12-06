@@ -7,51 +7,51 @@ FILTER_DATA = { 'month':'month',
                 'both':'both',
                 'none':'none'}
 
-MONTH_DATA = { 'jan':{
+MONTH_DATA = { 1:{
                     'full_name':'January',
                     'value':1
                     },
-                'feb':{
+                2:{
                         'full_name':'February',
                         'value':2
                     },
-                'mar':{
+                3:{
                     'full_name':'March',
                     'value':3
                 },
-                'apr':{
+                4:{
                     'full_name':'April',
                     'value':4
                 },
-                'may':{
+                5:{
                     'full_name':'May',
                     'value':5
                 },
-                'jun':{
+                6:{
                     'full_name':'June',
                     'value':6
                 },
-                'jul':{
+                7:{
                     'full_name':'July',
                     'value':7
                 },
-                'aug':{
+                8:{
                     'full_name':'August',
                     'value':8
                 },
-                'sep':{
+                9:{
                     'full_name':'September',
                     'value':9
                 },
-                'oct':{
+                10:{
                     'full_name':'October',
                     'value':10
                 },
-                'nov':{
+                11:{
                     'full_name':'November',
                     'value':11
                 },
-                'dec':{
+                12:{
                     'full_name':'December',
                     'value':12
                 }
@@ -93,7 +93,7 @@ def get_user_filter():
 
 def get_month():
     while True:
-        month_input = input('\nSelect month\njan => January, feb => February, mar => March, apr => April, may => May, jun => June, jul => July, aug => August, sep => September, oct => October, nov => November, dec => December \n Note: Type jan to select January month\nType input : ')           
+        month_input = input('\nSelect month\n1 => January, 2 => February, 3 => March, 4 => April, 5 => May, 6 => June, 7 => July, 8 => August, 9 => September, 10 => October, 11 => November, 12 => December \nNote: Type 1 to select January month\nType input : ')           
 
         if month_input in MONTH_DATA:
             month_val = MONTH_DATA[month_input].value

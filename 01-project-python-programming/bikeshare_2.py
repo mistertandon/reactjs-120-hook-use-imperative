@@ -51,14 +51,14 @@ def load_data(city, month, day):
     df = pd.read_csv(city + ".csv")
 
     df['Start Time'], df['End Time'] = pd.to_datetime(df['Start Time']), pd.to_datetime(df['End Time'])
+    df['start_time_month'], df['end_time_month'] = df['Start Time'].dt.month, df['End Time'].dt.month
+    df['start_time_weekday'], df['end_time_weekday'] = df['Start Time'].dt.weekday, df['End Time'].dt.weekday
 
     if month != 'all':
-        df['start_time_month'], df['end_time_month'] = df['Start Time'].dt.month, df['End Time'].dt.month
         df = df[(df['start_time_month'] == month) & (df['end_time_month'] == month)]
     
     if day != 'all':
-        df['start_time_weekday'], df['end_time_weekday'].dt.weekday = df['Start Time'].dt.weekday, df['End Time'].dt.weekday
-        df = df[(df['start_time_weekday'] == day) & (df['start_time_weekday'] == day)]
+        df = df[(df['start_time_weekday'] == day) & (df['end_time_weekday'] == day)]
         
     return df
 
@@ -70,7 +70,8 @@ def time_stats(df):
     start_time = time.time()
 
     # display the most common month
-
+    common_month_max_value = df.groupby('start_time_month').agg({'start_time_weekday':'count'}).idxmax()['start_time_weekday']
+    print('most common month : ', helper.MONTH_DATA[common_month_max_value]['full_name'])
 
     # display the most common day of week
 
@@ -141,16 +142,17 @@ def main():
 
         #city, month, day = get_filters()
         #df = load_data(city, month, day)
-        df = load_data("chicago", 6, 'all')
+        df = load_data("chicago", 'all', 'all')
 
         time_stats(df)
+        sys.exit()
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df)
-
-        restart = input('\nWould you like to restart? Enter yes or no.\n')
-        if restart.lower() != 'yes':
-            break
+        break
+        #restart = input('\nWould you like to restart? Enter yes or no.\n')
+        #if restart.lower() != 'yes':
+        #    break
 
 
 if __name__ == "__main__":

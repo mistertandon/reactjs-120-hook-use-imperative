@@ -136,8 +136,11 @@ def user_stats(df):
     start_time = time.time()
 
     # Display counts of user types
-    counts_of_user_types = df['User Type'].size
-    print('counts of user types : ', counts_of_user_types)
+    counts_of_user_types = df.groupby('User Type').agg({'start_time_month':'count'})
+    print(counts_of_user_types)
+    print(type(counts_of_user_types.loc['Customer']))
+    
+    #print(counts_of_user_types.groups.keys())
 
     # Display counts of gender
 

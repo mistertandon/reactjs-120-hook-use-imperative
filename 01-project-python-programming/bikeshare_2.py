@@ -4,6 +4,9 @@ import numpy as np
 import helper
 import sys
 from datetime import datetime
+import warnings
+
+warnings.simplefilter(action='ignore', category=FutureWarning)
 
 def get_filters():
     """
@@ -52,10 +55,10 @@ def load_data(city, month, day):
     df['start_time_month'], df['end_time_month'] = df['Start Time'].dt.month, df['End Time'].dt.month
     df['start_time_weekday'], df['end_time_weekday'] = df['Start Time'].dt.weekday, df['End Time'].dt.weekday
     df['start_time_hour'], df['end_time_hour'] = df['Start Time'].dt.hour, df['End Time'].dt.hour
-
+                     
     if month != 'all':
         df = df[(df['start_time_month'] == month) & (df['end_time_month'] == month)]
-    
+
     if day != 'all':
         df = df[(df['start_time_weekday'] == day) & (df['end_time_weekday'] == day)]
 
@@ -77,7 +80,7 @@ def time_stats(df):
     print('most common weekday : ', helper.DAY_DATA[common_week_max_value])
 
     # display the most common start hour
-    common_hour_max_value = df.groupby('start_time_hour').agg({'start_time_weekday':'count'}).idmax()['start_time_hour']
+    common_hour_max_value = df.groupby('start_time_hour').agg({'start_time_weekday':'count'}).idxmax()['start_time_weekday']
     print('most common start hour : ', common_hour_max_value)
 
     print("\nThis took %s seconds." % (time.time() - start_time))

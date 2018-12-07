@@ -122,4 +122,4 @@ def get_day():
 
     print('Selected Day is: ', day_val)
 
-    return day_val
+    return day_input

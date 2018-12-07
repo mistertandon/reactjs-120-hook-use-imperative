@@ -94,15 +94,15 @@ def station_stats(df):
     start_time = time.time()
 
     # display most commonly used start station
-    common_start_station = df.groupby('Start Station').agg({'Start Station':'count'}).idxmax()
+    common_start_station = df.groupby('Start Station').agg({'Start Station':'count'}).idxmax()['Start Station']
     print('Most commonly used start station : ', common_start_station)
 
     # display most commonly used end station
-    common_end_station = df.groupby('End Station').agg({'End Station':'count'}).idxmax()
+    common_end_station = df.groupby('End Station').agg({'End Station':'count'}).idxmax()['End Station']
     print('Most commonly used end station : ', common_end_station)
 
     # display most frequent combination of start station and end station trip
-    common_start_end_trip = df.groupby(['Start Station', 'End Station']).agg({'Start Station':'count'}).idxmax()
+    common_start_end_trip = df.groupby(['Start Station', 'End Station']).agg({'Start Station':'count'}).idxmax()['Start Station']
     print('Most frequent combination of start station and end station : ', common_start_end_trip)
 
     print("\nThis took %s seconds." % (time.time() - start_time))
@@ -118,10 +118,12 @@ def trip_duration_stats(df):
     start_time = time.time()
 
     # display total travel time
-
+    total_travel_time = df['Trip Duration'].sum()
+    print('total travel time : ', total_travel_time)
 
     # display mean travel time
-
+    mean_travel_time = df['Trip Duration'].mean()
+    print('Mean travel time : ', mean_travel_time)
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
@@ -134,7 +136,8 @@ def user_stats(df):
     start_time = time.time()
 
     # Display counts of user types
-
+    counts_of_user_types = df['User Type'].size
+    print('counts of user types : ', counts_of_user_types)
 
     # Display counts of gender
 
@@ -149,15 +152,15 @@ def user_stats(df):
 def main():
     while True:
 
-        city, month, day = get_filters()
-        df = load_data(city, month, day)
-        #df = load_data("chicago", 6, 'all')
-        time_stats(df)
+        #city, month, day = get_filters()
+        #df = load_data(city, month, day)
+        df = load_data("chicago", 6, 'all')
+        #time_stats(df)
+        #station_stats(df)
+        #trip_duration_stats(df)
         
-        station_stats(df)
-        sys.exit()
-        trip_duration_stats(df)
         user_stats(df)
+        sys.exit()
         break
         #restart = input('\nWould you like to restart? Enter yes or no.\n')
         #if restart.lower() != 'yes':

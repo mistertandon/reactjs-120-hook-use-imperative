@@ -77,13 +77,14 @@ def time_stats(df):
 
     if is_exist:
         common_month_grp = df.groupby('start_time_month')
-        sub_sets_len = common_month_grp.groups.keys()
+        sub_sets_len = len(common_month_grp.groups.keys())
 
         if sub_sets_len > 0:
             common_month_max_value = common_month_grp.agg({'start_time_weekday':'count'}).idxmax()['start_time_weekday']
             print('most common month : ', helper.MONTH_DATA[common_month_max_value]['full_name'])
         else:
             no_data_found()
+            
     else:
         no_column_error_msg('start_time_month')
 
@@ -92,8 +93,15 @@ def time_stats(df):
     is_exist = is_column_exist(df, 'start_time_weekday')
 
     if is_exist:    
-        common_week_max_value = df.groupby('start_time_weekday').agg({'start_time_weekday':'count'}).idxmax()['start_time_weekday']
-        print('most common weekday : ', helper.DAY_DATA[common_week_max_value])
+        common_week_grp = df.groupby('start_time_weekday')
+        sub_sets_len = len(common_week_grp.groups.keys())
+
+        if sub_sets_len > 0:
+            common_week_max_value = common_week_grp.agg({'start_time_weekday':'count'}).idxmax()['start_time_weekday']
+            print('most common weekday : ', helper.DAY_DATA[common_week_max_value])
+        else:
+            no_data_found()
+
     else:
         no_column_error_msg('start_time_weekday')
 
@@ -102,8 +110,15 @@ def time_stats(df):
     is_exist = is_column_exist(df, 'start_time_hour')
 
     if is_exist:
-        common_hour_max_value = df.groupby('start_time_hour').agg({'start_time_weekday':'count'}).idxmax()['start_time_weekday']
-        print('most common start hour : ', common_hour_max_value)
+        common_hour_grp = df.groupby('start_time_hour')
+        sub_sets_len = len(common_hour_grp.groups.keys())
+
+        if sub_sets_len > 0:        
+            common_hour_max_value = common_hour_grp.agg({'start_time_weekday':'count'}).idxmax()['start_time_weekday']
+            print('most common start hour : ', common_hour_max_value)
+        else:
+            no_data_found()
+
     else:
         no_column_error_msg('start_time_hour')
 

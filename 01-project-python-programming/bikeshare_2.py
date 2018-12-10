@@ -72,16 +72,40 @@ def time_stats(df):
     start_time = time.time()
 
     # display the most common month
-    common_month_max_value = df.groupby('start_time_month').agg({'start_time_weekday':'count'}).idxmax()['start_time_weekday']
-    print('most common month : ', helper.MONTH_DATA[common_month_max_value]['full_name'])
+
+    is_exist = is_column_exist(df, 'start_time_month')
+
+    if is_exist:
+        common_month_grp = df.groupby('start_time_month')
+        sub_sets_len = common_month_grp.groups.keys()
+
+        if sub_sets_len > 0:
+            common_month_max_value = common_month_grp.agg({'start_time_weekday':'count'}).idxmax()['start_time_weekday']
+            print('most common month : ', helper.MONTH_DATA[common_month_max_value]['full_name'])
+        else:
+            no_data_found()
+    else:
+        no_column_error_msg('start_time_month')
 
     # display the most common day of week
-    common_week_max_value = df.groupby('start_time_weekday').agg({'start_time_weekday':'count'}).idxmax()['start_time_weekday']
-    print('most common weekday : ', helper.DAY_DATA[common_week_max_value])
+
+    is_exist = is_column_exist(df, 'start_time_weekday')
+
+    if is_exist:    
+        common_week_max_value = df.groupby('start_time_weekday').agg({'start_time_weekday':'count'}).idxmax()['start_time_weekday']
+        print('most common weekday : ', helper.DAY_DATA[common_week_max_value])
+    else:
+        no_column_error_msg('start_time_weekday')
 
     # display the most common start hour
-    common_hour_max_value = df.groupby('start_time_hour').agg({'start_time_weekday':'count'}).idxmax()['start_time_weekday']
-    print('most common start hour : ', common_hour_max_value)
+
+    is_exist = is_column_exist(df, 'start_time_hour')
+
+    if is_exist:
+        common_hour_max_value = df.groupby('start_time_hour').agg({'start_time_weekday':'count'}).idxmax()['start_time_weekday']
+        print('most common start hour : ', common_hour_max_value)
+    else:
+        no_column_error_msg('start_time_hour')
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
@@ -94,16 +118,32 @@ def station_stats(df):
     start_time = time.time()
 
     # display most commonly used start station
-    common_start_station = df.groupby('Start Station').agg({'Start Station':'count'}).idxmax()['Start Station']
-    print('Most commonly used start station : ', common_start_station)
 
-    # display most commonly used end station
-    common_end_station = df.groupby('End Station').agg({'End Station':'count'}).idxmax()['End Station']
-    print('Most commonly used end station : ', common_end_station)
+    is_exist_i = is_column_exist(df, 'Start Station')
 
-    # display most frequent combination of start station and end station trip
-    common_start_end_trip = df.groupby(['Start Station', 'End Station']).agg({'Start Station':'count'}).idxmax()['Start Station']
-    print('Most frequent combination of start station and end station : ', common_start_end_trip)
+    if is_exist_i:
+        common_start_station = df.groupby('Start Station').agg({'Start Station':'count'}).idxmax()['Start Station']
+        print('Most commonly used start station : ', common_start_station)
+    else:
+        no_column_error_msg('Start Station')
+
+        # display most commonly used end station
+
+    is_exist_ii = is_column_exist(df, 'End Station')
+
+    if is_exist_ii:
+        common_end_station = df.groupby('End Station').agg({'End Station':'count'}).idxmax()['End Station']
+        print('Most commonly used end station : ', common_end_station)
+    else:
+        no_column_error_msg('End Station')
+
+        # display most frequent combination of start station and end station trip
+    if is_exist_i and is_exist_ii:
+        common_start_end_trip = df.groupby(['Start Station', 'End Station']).agg({'Start Station':'count'}).idxmax()['Start Station']
+        print('Most frequent combination of start station and end station : ', common_start_end_trip)
+    else:
+        no_column_error_msg('Start Station, End Station')
+
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
@@ -117,13 +157,18 @@ def trip_duration_stats(df):
     print('\nCalculating Trip Duration...\n')
     start_time = time.time()
 
-    # display total travel time
-    total_travel_time = df['Trip Duration'].sum()
-    print('total travel time : ', total_travel_time)
+    is_exist = is_column_exist(df, 'Start Station')
 
-    # display mean travel time
-    mean_travel_time = df['Trip Duration'].mean()
-    print('Mean travel time : ', mean_travel_time)
+    if is_exist:    
+        # display total travel time
+        total_travel_time = df['Trip Duration'].sum()
+        print('total travel time : ', total_travel_time)
+
+        # display mean travel time
+        mean_travel_time = df['Trip Duration'].mean()
+        print('Mean travel time : ', mean_travel_time)
+    else:
+        no_column_error_msg('Trip Duration')
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
@@ -136,32 +181,74 @@ def user_stats(df):
     start_time = time.time()
 
     # Display counts of user types
-    counts_of_user_types = df.groupby('User Type').agg({'start_time_month':'count'})
-    print(counts_of_user_types)
-    print(type(counts_of_user_types.loc['Customer']))
-    
-    #print(counts_of_user_types.groups.keys())
+    is_exist = is_column_exist(df, 'User Type')
+
+    if is_exist:
+        user_types_grp = df.groupby('User Type')
+        user_types_grp_agg = user_types_grp.agg({'start_time_month':'count'})
+        user_types_grp_keys = user_types_grp.groups.keys()
+        for user_type in user_types_grp_keys:
+            print(' User Type: ', user_type, ', Count: ', user_types_grp_agg.loc[user_type]['start_time_month'])
+    else:
+        no_column_error_msg('User Type')
+
+    print('-'*40, '\n')
 
     # Display counts of gender
+    is_exist = is_column_exist(df, 'Gender')
 
+    if is_exist:
+        user_gender_grp = df.groupby('Gender')
+        user_gender_grp_agg = user_gender_grp.agg({'start_time_month':'count'})
+        user_gender_grp_keys = user_gender_grp.groups.keys()
+        for user_gender in user_gender_grp_keys:
+            print(' Gender: ', user_gender, ', Count: ', user_gender_grp_agg.loc[user_gender]['start_time_month'])
+    else:
+        no_column_error_msg('Gender')
+
+    print('-'*40, '\n')
 
     # Display earliest, most recent, and most common year of birth
 
+    is_exist = is_column_exist(df, 'Birth Year')
+
+    if is_exist:
+        user_birth_year_max_value = df.groupby('Birth Year').agg({'start_time_month':'count'}).idxmax()['start_time_month']
+        print('earliest year of birth : ', df['Birth Year'].nsmallest(n = 1).iloc[0])
+        print('most recent year of birth : ', df['Birth Year'].nlargest(n = 1).iloc[0])
+        print('most common year of birth : ', user_birth_year_max_value)
+    else:
+        no_column_error_msg('Gender')
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
 
+def is_column_exist(df, coulmn):
+    is_exist = False
+
+    if coulmn in df.columns:
+        is_exist = True
+
+    return is_exist
+
+def no_column_error_msg(column_name):
+    print(column_name, ' coulmn does not exist.')
+
+
+def no_data_found():
+    print('No data found')
+
+
 def main():
     while True:
 
-        #city, month, day = get_filters()
-        #df = load_data(city, month, day)
-        df = load_data("chicago", 6, 'all')
-        #time_stats(df)
-        #station_stats(df)
-        #trip_duration_stats(df)
-        
+        city, month, day = get_filters()
+        df = load_data(city, month, day)
+        #df = load_data("chicago", 7, 'all')
+        time_stats(df)
+        station_stats(df)
+        trip_duration_stats(df)
         user_stats(df)
         sys.exit()
         break

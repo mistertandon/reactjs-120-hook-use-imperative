@@ -75,7 +75,34 @@ DAY_DATA = {0: 'monday',
             3: 'thursday',
             4: 'friday',
             5: 'saturday',
-            6: 'sunday'}                
+            6: 'sunday'}
+
+"""
+DAY_DATA contains list of weekdays where monday has 0 value
+"""
+USER_RESPONSE = {
+    'no': 'No',
+    'yes': 'Yes'
+}
+
+
+def display_raw_data_request():
+    """
+    Asks user if he would like to see raw lines of data.
+
+    Returns:
+        user_res (str) - User response
+    """
+    while True:
+        user_res = input('\nWould you like to see raw lines of data\nEnter either yes OR no\nType input : ')
+
+        if user_res in USER_RESPONSE.keys():
+            break
+        else:
+            print('\nYou have entered incorrect option. Please try again...')
+
+    return user_res
+
 
 def get_user_city():
     """
@@ -85,7 +112,7 @@ def get_user_city():
         city_val (str) - name of the city to analyze
     """
     while True:
-        city_input = input('\nFor which city would you like to see data. Available cities are chicago, new york city, washington : \nType input : ')
+        city_input = input('\nFor which city would you like to see data. Available cities are chicago, new york city, washington\nType input : ')
 
         if city_input in CITY_DATA:
             city_val = city_input

@@ -19,6 +19,7 @@ def get_filters():
     """
     print('Hello! Let\'s explore some US bikeshare data!')
 
+    
     month = day = 'all'
     # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     city = helper.get_user_city()
@@ -34,12 +35,14 @@ def get_filters():
     if filter_val == 'both' or filter_val == 'day':
         day = helper.get_day()
 
+    display_raw_data = helper.display_raw_data_request()
+
     print('-'*40)
 
-    return city, month, day
+    return city, month, day, display_raw_data
 
 
-def load_data(city, month, day):
+def load_data(city, month, day, display_raw_data):
     """
     Loads data for the specified city and filters by month and day if applicable.
 
@@ -65,6 +68,9 @@ def load_data(city, month, day):
     if day != 'all':
         df = df[(df['start_time_weekday'] == day)
                 & (df['end_time_weekday'] == day)]
+
+    if display_raw_data == 'yes':
+        print(df.head())
 
     return df
 
@@ -324,8 +330,8 @@ def no_data_found():
 def main():
     while True:
 
-        city, month, day = get_filters()
-        df = load_data(city, month, day)
+        city, month, day, display_raw_data = get_filters()
+        df = load_data(city, month, day, display_raw_data)
         time_stats(df)
         station_stats(df)
         trip_duration_stats(df)

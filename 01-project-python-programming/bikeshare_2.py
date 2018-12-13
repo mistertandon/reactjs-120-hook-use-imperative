@@ -17,7 +17,7 @@ def get_filters():
         (str) month - name of the month to filter by, or "all" to apply no month filter
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
-    print('Hello! Let\'s explore some US bikeshare data!')
+    print(' Hello! Let\'s explore some US bikeshare data!')
 
     
     month = day = 'all'
@@ -78,7 +78,7 @@ def load_data(city, month, day, display_raw_data):
 def time_stats(df):
     """Displays statistics on the most frequent times of travel."""
 
-    print('\nCalculating The Most Frequent Times of Travel...\n')
+    print('\n Calculating The Most Frequent Times of Travel...\n')
     start_time = time.time()
 
     # display the most common month
@@ -99,7 +99,7 @@ def time_stats(df):
         if sub_sets_len > 0:
             common_month_max_value = common_month_grp.agg(
                 {'start_time_weekday': 'count'}).idxmax()['start_time_weekday']
-            print('most common month : ',
+            print(' most common month : ',
                   helper.MONTH_DATA[common_month_max_value]['full_name'])
         else:
             no_data_found()
@@ -117,7 +117,7 @@ def time_stats(df):
         if sub_sets_len > 0:
             common_week_max_value = common_week_grp.agg(
                 {'start_time_weekday': 'count'}).idxmax()['start_time_weekday']
-            print('most common weekday : ',
+            print(' most common weekday : ',
                   helper.DAY_DATA[common_week_max_value])
         else:
             no_data_found()
@@ -135,21 +135,21 @@ def time_stats(df):
         if sub_sets_len > 0:
             common_hour_max_value = common_hour_grp.agg(
                 {'start_time_weekday': 'count'}).idxmax()['start_time_weekday']
-            print('most common start hour : ', common_hour_max_value)
+            print(' most common start hour : ', common_hour_max_value)
         else:
             no_data_found()
 
     else:
         no_column_error_msg('start_time_hour')
 
-    print("\nThis took %s seconds." % (time.time() - start_time))
+    print("\n This took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
 
 def station_stats(df):
     """Displays statistics on the most popular stations and trip."""
 
-    print('\nCalculating The Most Popular Stations and Trip...\n')
+    print('\n Calculating The Most Popular Stations and Trip...\n')
     start_time = time.time()
 
     # display most commonly used start station
@@ -162,7 +162,7 @@ def station_stats(df):
         if sub_sets_len > 0:
             common_start_station_val = common_start_station_grp.agg(
                 {'Start Station': 'count'}).idxmax()['Start Station']
-            print('Most commonly used start station : ',
+            print(' Most commonly used start station : ',
                   common_start_station_val)
         else:
             no_data_found()
@@ -181,7 +181,7 @@ def station_stats(df):
         if sub_sets_len > 0:
             common_end_station_val = common_end_station_grp.agg(
                 {'End Station': 'count'}).idxmax()['End Station']
-            print('Most commonly used end station : ', common_end_station_val)
+            print(' Most commonly used end station : ', common_end_station_val)
         else:
             no_data_found()
 
@@ -197,7 +197,7 @@ def station_stats(df):
         if sub_sets_len > 0:
             common_start_end_trip_val = common_start_end_trip_grp.agg(
                 {'Start Station': 'count'}).idxmax()['Start Station']
-            print('Most frequent combination of start station and end station : ',
+            print(' Most frequent combination of start station and end station : ',
                   common_start_end_trip_val)
         else:
             no_data_found()
@@ -205,7 +205,7 @@ def station_stats(df):
     else:
         no_column_error_msg('Start Station, End Station')
 
-    print("\nThis took %s seconds." % (time.time() - start_time))
+    print("\n This took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
     return
@@ -214,7 +214,7 @@ def station_stats(df):
 def trip_duration_stats(df):
     """Displays statistics on the total and average trip duration."""
 
-    print('\nCalculating Trip Duration...\n')
+    print('\n Calculating Trip Duration...\n')
     start_time = time.time()
 
     is_exist = is_column_exist(df, 'Trip Duration')
@@ -222,22 +222,22 @@ def trip_duration_stats(df):
     if is_exist:
         # display total travel time
         total_travel_time = df['Trip Duration'].sum()
-        print('total travel time : ', total_travel_time)
+        print(' total travel time : ', total_travel_time)
 
         # display mean travel time
         mean_travel_time = df['Trip Duration'].mean()
-        print('Mean travel time : ', mean_travel_time)
+        print(' Mean travel time : ', mean_travel_time)
     else:
         no_column_error_msg('Trip Duration')
 
-    print("\nThis took %s seconds." % (time.time() - start_time))
+    print("\n This took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
 
 def user_stats(df):
     """Displays statistics on bikeshare users."""
 
-    print('\nCalculating User Stats...\n')
+    print('\n Calculating User Stats...\n')
     start_time = time.time()
 
     # Display counts of user types
@@ -295,18 +295,18 @@ def user_stats(df):
         if sub_sets_len > 0:
             user_birth_year_max_value = user_birth_year_grp.agg(
                 {'start_time_month': 'count'}).idxmax()['start_time_month']
-            print('earliest year of birth : ',
+            print(' earliest year of birth : ',
                   df['Birth Year'].nsmallest(n=1).iloc[0])
-            print('most recent year of birth : ',
+            print(' most recent year of birth : ',
                   df['Birth Year'].nlargest(n=1).iloc[0])
-            print('most common year of birth : ', user_birth_year_max_value)
+            print(' most common year of birth : ', user_birth_year_max_value)
         else:
             no_data_found()
 
     else:
         no_column_error_msg('Birth Year')
 
-    print("\nThis took %s seconds." % (time.time() - start_time))
+    print("\n This took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
 
@@ -320,11 +320,11 @@ def is_column_exist(df, coulmn):
 
 
 def no_column_error_msg(column_name):
-    print(column_name, 'coulmn does not exist.')
+    print(' ', column_name, 'coulmn does not exist.')
 
 
 def no_data_found():
-    print('No data found')
+    print(' No data found')
 
 
 def main():

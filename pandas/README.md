@@ -14,6 +14,7 @@
    - pandas.DataFrame.sort_values AND pandas.DataFrame.apply [notebook](007_apply_and_sort_values.ipynb)
    - [isnull, duplicated](../data_analysis_part_i/data_analysis_part_i.ipynb)
    - [append](009_append.ipynb)
+   - [merge](0010_merge.ipynb)
 ---
 
  - Series

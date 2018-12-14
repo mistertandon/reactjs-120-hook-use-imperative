@@ -15,6 +15,7 @@
    - [isnull, duplicated](../data_analysis_part_i/data_analysis_part_i.ipynb)
    - [append](009_append.ipynb)
    - [merge](0010_merge.ipynb)
+   - [rename](0010_rename.ipynb)
 ---
 
  - Series

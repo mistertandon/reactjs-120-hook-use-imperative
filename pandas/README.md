@@ -16,6 +16,9 @@
    - [append](009_append.ipynb)
    - [merge](0010_merge.ipynb)
    - [rename](0010_rename.ipynb)
+   - [groupby](008_groupby.ipynb) example I
+   - [groupby](0081_groupby_ii.ipynb) example II
+   - [query](010_query.ipynb)
 ---
 
  - Series

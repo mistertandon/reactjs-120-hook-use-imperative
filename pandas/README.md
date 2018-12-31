@@ -19,6 +19,7 @@
    - [groupby](008_groupby.ipynb) example I
    - [groupby](0081_groupby_ii.ipynb) example II
    - [query](010_query.ipynb)
+   - Rename DataFrame Columns [rename](./part_2/01_rename_columns.ipynb)
 ---
 
  - Series

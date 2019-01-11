@@ -9,20 +9,16 @@
  - DataFrame
    - Create [DataFrame](001_DataFrame.ipynb) in different ways
    - df.std() and df.mean() function illustration by making use of correlation [notebbok](004_correlation.ipynb)
-   - pandas.DataFrame.shift [notebook](005_shift.ipynb)
-   - pandas.DataFrame.applymap [notebook](006_applymap.ipynb)
-   - pandas.DataFrame.sort_values AND pandas.DataFrame.apply [notebook](007_apply_and_sort_values.ipynb)
-   - [isnull, duplicated](../data_analysis_part_i/data_analysis_part_i.ipynb)
+   - [shift](005_shift.ipynb) | [applymap](006_applymap.ipynb) | [sort_values & apply](007_apply_and_sort_values.ipynb) | [isnull, duplicated](../data_analysis_part_i/data_analysis_part_i.ipynb)
    - [append](009_append.ipynb)
    - [merge](0010_merge.ipynb)
    - [rename](0010_rename.ipynb)
-   - [groupby](008_groupby.ipynb) example I
-   - [groupby](0081_groupby_ii.ipynb) example II
+   - [groupby](008_groupby.ipynb) example I | [groupby](0081_groupby_ii.ipynb) example II
    - [query](010_query.ipynb)
    - Rename DataFrame Columns [rename](./part_2/01_rename_columns.ipynb)
 ---
 
  - Series
-	- Function [sum](002_series.sum.ipynb)
+	- [sum](002_series.sum.ipynb) | [](nlargest)
 
 ---

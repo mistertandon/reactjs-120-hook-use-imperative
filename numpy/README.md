@@ -4,4 +4,4 @@
   - [Find max element position in 2-D ndarray | unravel_index ](0040_np.unravel_index.ipynb)
   - [Mean](mean.ipynb)
   - [unique, count_nonzero](../data_analysis_part_i/data_analysis_part_i.ipynb)
-  - [repeat](0060_repeat.ipynb)
+  - [repeat](0060_repeat.ipynb) | [randint](./../pandas/part_2/02_nlargest.ipynb)

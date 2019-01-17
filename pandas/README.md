@@ -15,6 +15,7 @@
    - [rename part i](0010_rename.ipynb) | [rename part ii](./part_2/01_rename_columns.ipynb)
    - [groupby](008_groupby.ipynb) example I | [groupby](0081_groupby_ii.ipynb) example II
    - [query](010_query.ipynb)
+   - [drop](./part_2/03_drop.ipynb)
 ---
 
  - Series

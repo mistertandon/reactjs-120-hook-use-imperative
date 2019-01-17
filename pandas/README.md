@@ -12,10 +12,9 @@
    - [shift](005_shift.ipynb) | [applymap](006_applymap.ipynb) | [sort_values & apply](007_apply_and_sort_values.ipynb) | [isnull, duplicated](../data_analysis_part_i/data_analysis_part_i.ipynb)
    - [append](009_append.ipynb)
    - [merge](0010_merge.ipynb)
-   - [rename](0010_rename.ipynb)
+   - [rename part i](0010_rename.ipynb) | [rename part ii](./part_2/01_rename_columns.ipynb)
    - [groupby](008_groupby.ipynb) example I | [groupby](0081_groupby_ii.ipynb) example II
    - [query](010_query.ipynb)
-   - Rename DataFrame Columns [rename](./part_2/01_rename_columns.ipynb)
 ---
 
  - Series

@@ -16,66 +16,99 @@ FILTER_DATA = { 'month':'month',
 """
 MONTH_DATA contains list of months
 """
-MONTH_DATA = { 1:{
-                    'full_name':'January',
-                    'value':1
-                },
-                2:{
-                    'full_name':'February',
-                    'value':2
-                },
-                3:{
-                    'full_name':'March',
-                    'value':3
-                },
-                4:{
-                    'full_name':'April',
-                    'value':4
-                },
-                5:{
-                    'full_name':'May',
-                    'value':5
-                },
-                6:{
-                    'full_name':'June',
-                    'value':6
-                },
-                7:{
-                    'full_name':'July',
-                    'value':7
-                },
-                8:{
-                    'full_name':'August',
-                    'value':8
-                },
-                9:{
-                    'full_name':'September',
-                    'value':9
-                },
-                10:{
-                    'full_name':'October',
-                    'value':10
-                },
-                11:{
-                    'full_name':'November',
-                    'value':11
-                },
-                12:{
-                    'full_name':'December',
-                    'value':12
-                }
+
+MONTH_DATA_REF = {
+    'january': 1,
+    'february': 2,
+    'march': 3,
+    'april': 4,
+    'may': 5,
+    'june': 6,
+    'July': 7,
+    'August': 8,
+    'September': 9,
+    'October': 10,
+    'November': 11,
+    'December': 12
 }
+
+MONTH_DATA = {
+    1: {
+        'full_name': 'January',
+        'value': 1
+    },
+    2: {
+        'full_name': 'February',
+        'value': 2
+    },
+    3: {
+        'full_name': 'March',
+        'value': 3
+    },
+    4: {
+        'full_name': 'April',
+        'value': 4
+    },
+    5: {
+        'full_name': 'May',
+        'value': 5
+    },
+    6: {
+        'full_name': 'June',
+        'value': 6
+    },
+    7: {
+        'full_name': 'July',
+        'value': 7
+    },
+    8: {
+        'full_name': 'August',
+        'value': 8
+    },
+    9: {
+        'full_name': 'September',
+        'value': 9
+    },
+    10: {
+        'full_name': 'October',
+        'value': 10
+    },
+    11: {
+        'full_name': 'November',
+        'value': 11
+    },
+    12: {
+        'full_name': 'December',
+        'value': 12
+    }
+}
+
+"""
+DAY_DATA_REF contains list of weekdays where monday has 0 value
+"""
+DAY_DATA_REF = {
+    'monday': 0,
+    'tuesday': 1,
+    'wednesday': 2,
+    'thursday': 3,
+    'friday': 4,
+    'saturday': 5,
+    'sunday': 6
+}
+
 
 """
 DAY_DATA contains list of weekdays where monday has 0 value
 """
-DAY_DATA = {0: 'monday',
-            1: 'tuesday',
-            2: 'wednesday',
-            3: 'thursday',
-            4: 'friday',
-            5: 'saturday',
-            6: 'sunday'}
+DAY_DATA = {
+    0: 'monday',
+    1: 'tuesday',
+    2: 'wednesday',
+    3: 'thursday',
+    4: 'friday',
+    5: 'saturday',
+    6: 'sunday'
+}
 
 """
 DAY_DATA contains list of weekdays where monday has 0 value
@@ -95,13 +128,14 @@ def display_raw_data_request():
     """
     while True:
         user_res = input('\n Would you like to see raw lines of data\n Enter either yes OR no\n Type input : ')
+        user_res_sanitized = user_res.lower()
 
-        if user_res in USER_RESPONSE.keys():
+        if user_res_sanitized in USER_RESPONSE.keys():
             break
         else:
             print('\n You have entered incorrect option. Please try again...')
 
-    return user_res
+    return user_res_sanitized
 
 
 def get_user_city():
@@ -113,9 +147,10 @@ def get_user_city():
     """
     while True:
         city_input = input('\n For which city would you like to see data. Available cities are chicago, new york city, washington\n Type input : ')
+        city_input_sanitized = city_input.lower()
 
-        if city_input in CITY_DATA:
-            city_val = city_input
+        if city_input_sanitized in CITY_DATA:
+            city_val = city_input_sanitized
             break
         else:
             print('\n You have entered incorrect option. Please try again...')
@@ -133,10 +168,11 @@ def get_user_filter():
         filter_val (str) - filter value
     """
     while True:
-        filter_input = input('\n Would you like to filter the data by month, day, both or not at all.\n Note: Type "none" [all in lower case]\n Available options are [ month, day, both, none ]\n Type input : ')
+        filter_input = input('\n Would you like to filter the data by month, day, both or not at all.\n Available options are [ month, day, both, none ]\n Type input : ')
+        filter_input_sanitized = filter_input.lower()
 
-        if filter_input in FILTER_DATA:
-            filter_val = filter_input
+        if filter_input_sanitized in FILTER_DATA:
+            filter_val = filter_input_sanitized
             break
         else:
             print('\n You have entered incorrect option. Please try again...')
@@ -154,15 +190,16 @@ def get_month():
         month_val (str) - Month value based on which filter option would perform.
     """
     while True:
-        month_input = int(input('\n Select month\n 1 => January, 2 => February, 3 => March, 4 => April, 5 => May, 6 => June, 7 => July, 8 => August, 9 => September, 10 => October, 11 => November, 12 => December \n Note: Type 1 to select January month\n Type input : '))
+        month_input = input('\n Select month\n January, February, March, April, May, June, July, August, September, October, November, December\n Type input : ')
+        month_input_sanitized = month_input.lower()
 
-        if month_input in MONTH_DATA:
-            month_val = MONTH_DATA[month_input]['value']
+        if month_input_sanitized in MONTH_DATA_REF:
+            month_val = MONTH_DATA_REF[month_input_sanitized]
             break
         else:
             print(' You have entered incorrect option. Please try again...')
     
-    print(' Selected Month is: ', MONTH_DATA[month_input]['full_name'])
+    print(' Selected Month is: ', MONTH_DATA[month_val]['full_name'])
 
     return month_val
 
@@ -175,14 +212,14 @@ def get_day():
         day_input (int) - weekday value based on which filter option would perform.
     """
     while True:
-        day_input = int(input('\n Select day\n 0 => Monday, 1 => Tuesday, 2 => Wednesday, 3 => Thursday, 4 => Friday, 5 => Saturday, 6 => Sunday\n Note: Type 1 to select Tuesday\n Type input : '))
+        day_input = input('\n Select day\n Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday\n Type input : ')
+        day_input_sanitized = day_input.lower()
 
-        if day_input in DAY_DATA:
-            day_val = DAY_DATA[day_input]
+        if day_input_sanitized in DAY_DATA_REF:
             break
         else:
             print(' You have entered incorrect option. Please try again...')
 
-    print(' Selected Day is: ', day_val)
+    print(' Selected Day is: ', day_input_sanitized)
 
-    return day_input
+    return DAY_DATA_REF[day_input_sanitized]

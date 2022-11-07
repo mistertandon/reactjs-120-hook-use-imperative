@@ -1,7 +1,7 @@
-# udacity-ml-foundation
+# useImperative hook
 
-#### Important links
+> The most common use case you're going to have for when you need to do a custom ref with  useimperative handle when you need to access multiple elements inside of a custom component outside of that component where props just don't make sense.
 
- - Data Analysis questions
-   - [Part i](./data_analysis_part_i_and_ii\data_analysis_part_i.ipynb)
-   - [Part ii]((./data_analysis_part_i_and_ii\data_analysis_part_ii.ipynb))
+> Syntax:
+
+> useImperativeHandle(ref, createHandle, [deps])
